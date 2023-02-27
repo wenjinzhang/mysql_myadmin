@@ -17,7 +17,7 @@ services:
     networks:
       - mysql-phpmyadmin
 
-  # phpmyadmin --- mysql workbench
+  # phpmyadmin === mysql workbench
   phpmyadmin:
     depends_on:
       - db
