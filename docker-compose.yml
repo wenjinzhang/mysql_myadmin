@@ -4,7 +4,7 @@ services:
   # Database === mysql server
   db:
     platform: linux/x86_64
-    image: mysql:5.7
+    image: mysql:5.7.41
     volumes:
       - ./db_data:/var/lib/mysql
     restart: always
@@ -22,6 +22,21 @@ services:
     depends_on:
       - db
     image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - mysql-phpmyadmin
+
+  node :
+    depends_on:
+      - db
+    image: node:19-alpine3.16
+    volumes:
+      - ./web:/usr/src/app
     restart: always
     ports:
       - "8090:80"
